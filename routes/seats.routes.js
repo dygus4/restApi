@@ -21,7 +21,7 @@ const getElementFromLink = (req) => (
   router.route('/seats').post((req, res) => {
     const { day, seat, client, email } = req.body;
     const newElement = { id: uuidv4(), day: day, seat: seat, client: client, email: email };
-    if (db.seats.some(item =>(item.day === day && item.seat ===seat ))){
+    if (db.seats.some(item =>(item.day === day && item.seat === seat ))){
       res.status(404).json({ message: 'The slot is already taken...'})
     } else {
       db.seats.push(newElement);

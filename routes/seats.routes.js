@@ -26,6 +26,7 @@ const getElementFromLink = (req) => (
     } else {
       db.seats.push(newElement);
       res.send( { message: 'OK' } );
+      req.io.emit('seatsUpdated', db.seats)
     }
   });
   

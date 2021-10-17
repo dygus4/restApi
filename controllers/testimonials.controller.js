@@ -42,7 +42,7 @@ exports.getAll = async (req, res) => {
     try {
   
       const { author, text } = req.body;
-      const newTestimonial = new Testimonial({ author: author, text: text });
+      const newTestimonial = new Testimonial({ author, text });
       await newTestimonial.save();
       res.json({ message: 'OK' });
   
@@ -56,9 +56,10 @@ exports.getAll = async (req, res) => {
     const { author, text } = req.body;
   
     try {
-      const dep = await Testimonial.findById(req.params.id);
+      const {id} = req.params.id;
+      const dep = await Testimonial.findById(id);
       if(dep) {
-        await Testimonial.updateOne({ _id: req.params.id }, { $set: { author: author, text: text  }});
+        await Testimonial.updateOne({ _id: id }, { $set: { author, text  }});
         res.json({ message: 'OK', dep  });
       }
       else res.status(404).json({ message: 'Not found...' });
@@ -72,9 +73,10 @@ exports.getAll = async (req, res) => {
   exports.delete = async (req, res) => {
 
     try {
-      const dep = await Testimonial.findById(req.params.id);
+      const {id} = req.params.id;
+      const dep = await Testimonial.findById(id);
       if(dep) {
-        await Testimonial.deleteOne({ _id: req.params.id });
+        await Testimonial.deleteOne({ _id: id });
         res.json({ message: 'OK', dep });
       }
       else res.status(404).json({ message: 'Not found...' });

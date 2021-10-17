@@ -27,7 +27,7 @@ exports.post = async (req, res) => {
     try {
   
       const { day, seat, client, email } = req.body;
-      const newSeat = new Seat({ day: day, seat: seat, client: client, email: email });
+      const newSeat = new Seat({ day, seat, client, email });
       await newSeat.save();
       res.json({ message: 'OK' });
   
@@ -41,9 +41,10 @@ exports.put = async (req, res) => {
     const { day, seat, client, email } = req.body;
   
     try {
-      const dep = await Seat.findById(req.params.id);
+      const {id} = req.params.id;
+      const dep = await Seat.findById(id);
       if(dep) {
-        await Seat.updateOne({ _id: req.params.id }, { $set: { day: day, seat: seat, client: client, email: email  }});
+        await Seat.updateOne({ _id: id }, { $set: { day, seat, client, email  }});
         res.json({ message: 'OK', dep  });
       }
       else res.status(404).json({ message: 'Not found...' });
@@ -58,9 +59,10 @@ exports.put = async (req, res) => {
 exports.delete = async (req, res) => {
 
     try {
-      const dep = await Seat.findById(req.params.id);
+      const {id} = req.params.id;
+      const dep = await Seat.findById(id);
       if(dep) {
-        await Seat.deleteOne({ _id: req.params.id });
+        await Seat.deleteOne({ _id: id });
         res.json({ message: 'OK', dep });
       }
       else res.status(404).json({ message: 'Not found...' });

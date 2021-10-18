@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path')
-//const db = require('./db.js');
 var cors = require('cors')
 const socket = require('socket.io');
 const mongoose = require('mongoose');
@@ -37,7 +36,7 @@ app.use((req, res) => {
   })
 
 // connects our backend code with the database
-/*
+
 const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';
 
@@ -47,8 +46,9 @@ else if(NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBTest';
 else dbUri = 'mongodb://localhost:27017/NewWaveDB';
 
 mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-*/
-mongoose.connect('mongodb+srv://WojtkoW:wojteks1@cluster0.ebl86.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+console.log(dbUri);
+
+//mongoose.connect('mongodb+srv://WojtkoW:wojteks1@cluster0.ebl86.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
 const db = mongoose.connection;
  
 db.once('open', () => {

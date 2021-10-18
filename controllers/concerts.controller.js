@@ -64,7 +64,7 @@ exports.getById = async (req, res) => {
   exports.getByDay = async (req, res) => {
 
     try {
-      const dep = await Concert.find({day: req.params.day});
+      const dep = await Concert.find({day: parseInt(req.params.day)});
       if(!dep) res.status(404).json({ message: 'Not found' });
       else res.json(dep);
     }

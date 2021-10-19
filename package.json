@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "build": "cd client && npm install && npm run build",
-    "test": "set NODE_ENV=test&& mocha \"./{,!(node_modules|client)/**/}*.test.js\"",
+    "test": "snyk test && set NODE_ENV=test&& mocha \"./{,!(node_modules|client)/**/}*.test.js\"",
     "test:watch": "onchange \"./**/*.js\" -i -k -- npm run test"
   },
   "repository": {
@@ -24,10 +24,13 @@
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^3.21.1",
     "mocha": "^6.2.1",
+    "mongo-sanitize": "^1.0.1",
     "mongoose": "^5.7.1",
     "nodemon": "^2.0.13",
     "onchange": "^6.1.0",
+    "snyk": "^1.235.0",
     "socket.io": "^4.2.0",
     "uuid": "^8.3.2"
   }
